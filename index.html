@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Senhas Futurista Completo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="cabecalho">
+        <img src="https://cdn-icons-png.flaticon.com/512/3064/3064155.png" alt="Cadeado Fechado" class="icone-cadeado">
+        
+        <h1 class="titulo">Gerador de senhas</h1>
+        <h2 class="subtitulo">Gere instantaneamente uma senha aleatória e segura</h2>
+    </header>
+
+    <div class="container-senha">
+        <input type="text" id="senhaInput" value="senha" class="caixa-texto" readonly>
+        
+        <div class="botoes-acoes">
+            <button onclick="gerarSenha()" class="botao-futurista">Gerar Senha</button>
+            <button onclick="copiarSenha()" class="botao-futurista botao-copiar">Copiar</button>
+        </div>
+    </div>
+
+    <script>
+        function gerarSenha() {
+            // Banco de caracteres seguros (letras, números e símbolos)
+            const caracteres = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+~`|}{[]:;?><,./-=";
+            const tamanhoSenha = 16; // Tamanho padrão seguro
+            let novaSenha = "";
+            
+            // Loop para escolher caracteres aleatórios
+            for (let i = 0; i < tamanhoSenha; i++) {
+                const indiceAleatorio = Math.floor(Math.random() * caracteres.length);
+                novaSenha += caracteres.charAt(indiceAleatorio);
+            }
+            
+            // Insere a senha gerada dentro da caixa de texto verde
+            document.getElementById("senhaInput").value = novaSenha;
+        }
+
+        function copiarSenha() {
+            const caixaTexto = document.getElementById("senhaInput");
+            
+            // Evita que o usuário copie a palavra padrão "senha" antes de gerar uma real
+            if (caixaTexto.value === "senha" || caixaTexto.value === "") {
+                alert("Gere uma senha primeiro antes de copiar!");
+                return;
+            }
+            
+            // Seleciona e copia o texto para a área de transferência
+            caixaTexto.select();
+            caixaTexto.setSelectionRange(0, 99999); // Suporte para celulares
+            navigator.clipboard.writeText(caixaTexto.value);
+            
+            alert("Senha copiada com sucesso! 🚀");
+        }
+    </script>
+</body>
+</html>
